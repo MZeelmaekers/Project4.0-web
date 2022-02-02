@@ -1,0 +1,17 @@
+<h1>Results</h1>
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped">
+  <thead class="bg-primary text-white">
+  <tr>
+    <th scope="col">Picture</th>
+    <th scope="col">Name</th>
+    <th scope="col">Date</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let plant of (plants)">
+    <td>photo</td>
+    <td>{{plant.name}}</td>
+    <td>{{plant.createdAt | date:'dd/MM/yyyy - HH:mm'}}</td>
+  </tr>
+  </tbody>
+</table>
