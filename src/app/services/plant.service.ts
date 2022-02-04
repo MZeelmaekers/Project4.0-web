@@ -27,11 +27,16 @@ export class PlantService {
     return this.httpClient.get<Plant>(this.url + "plant/" + id, {headers: headers});
   }
 
-    postPlant(plant: Plant): Observable<Result>{
-    console.log('plant');
-    console.log(plant);
+  postPlant(plant: Plant): Observable<Plant>{
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json; charset=utf-8').set('Authorization', 'Bearer ' + this.token);
-    return this.httpClient.post<Result>(this.url + 'Plant', plant, {headers: headers});
+    return this.httpClient.post<Plant>(this.url + 'Plant', plant, {headers: headers});
   }
+
+  deletePlantAndResult(plantId: number, resultId:number){
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json; charset=utf-8').set('Authorization', 'Bearer ' + this.token);
+    this.httpClient.delete<Plant>(this.url + 'Plant/' + plantId, {headers: headers});
+  }
+
 }

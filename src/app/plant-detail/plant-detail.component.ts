@@ -40,11 +40,8 @@ export class PlantDetailComponent implements OnInit, OnDestroy {
   }
 
   async getPlant(){
-    console.log('plant')
     if (this.plantId != null) {
-      console.log('plant2')
       this.plant$ = await this.plantService.getPlantById(this.plantId).subscribe(result => {
-        console.log('plant3')
         this.plant = result
         this.getResult(result.resultId)
       });
@@ -52,9 +49,7 @@ export class PlantDetailComponent implements OnInit, OnDestroy {
   }
 
   async getResult(id: number){
-    console.log('result')
     if (id != null) {
-      console.log('result2')
       this.result$ = await this.resultService.getResultById(id).subscribe(result => {
         console.log(result)
         this.result = result
