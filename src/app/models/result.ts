@@ -1,6 +1,6 @@
 export interface Result{
   id: number;
   accuracy: number;
-  result: string;
+  prediction: string;
   createdAt: string;
 }
