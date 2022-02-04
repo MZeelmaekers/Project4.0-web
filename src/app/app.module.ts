@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import {HttpClientModule} from "@angular/common/http";
 import { HomeComponent } from './home/home.component';
 import {SecurityComponent} from "./security/security.component";
-import { DataTablesModule} from 'angular-datatables';
+import {SharedModule} from "./shared/shared.module";
+
+
 
 @NgModule({
   declarations: [
@@ -20,9 +21,7 @@ import { DataTablesModule} from 'angular-datatables';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    DataTablesModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

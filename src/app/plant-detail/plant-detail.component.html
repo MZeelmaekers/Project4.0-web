@@ -1,1 +1,12 @@
-<p>plant-detail works!</p>
+<div class="row">
+  <div class="col-4">
+    <img class="img-fluid" src="{{getPhoto(plant.fotoPath)}}" alt="Plant Photo">
+  </div>
+  <div class="col-8">
+    <p>Name: {{plant.name}}</p>
+    <p>Result: {{result.prediction}}</p>
+    <p>Accuracy: {{result.accuracy}}%</p>
+    <p>Fieldname: {{plant.fieldName}}</p>
+    <p>Created At: {{plant.createdAt | date:'dd/MM/yyyy - HH:mm'}}</p>
+  </div>
+</div>

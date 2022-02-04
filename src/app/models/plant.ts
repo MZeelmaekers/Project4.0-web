@@ -1,6 +1,6 @@
 export interface Plant{
   id: number;
-  photoPath: string;
+  fotoPath: string;
   location: string;
   fieldName: string;
   name: string;

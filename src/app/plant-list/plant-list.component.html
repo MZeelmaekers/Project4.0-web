@@ -8,8 +8,8 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let plant of (plants)">
-    <td>photo</td>
+  <tr *ngFor="let plant of (plants)" (click)="detail(plant.id)" class="pointer">
+    <td width="30%"><img src="{{getPhoto(plant.fotoPath)}}" width="50%"  alt="test"></td>
     <td>{{plant.name}}</td>
     <td>{{plant.createdAt | date:'dd/MM/yyyy - HH:mm'}}</td>
   </tr>
