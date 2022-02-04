@@ -64,4 +64,8 @@ export class PlantListComponent implements OnInit, OnDestroy {
   async detail(id: number) {
     await this.router.navigate(['plants/detail'], {state: {id: id}});
   }
+
+  delete(id: number) {
+    
+  }
 }
