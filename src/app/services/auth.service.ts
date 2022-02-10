@@ -19,7 +19,6 @@ export class AuthService {
 
   getUser(): User | null {
     if (this.isLoggedIn()){
-      console.log(parseInt(localStorage.getItem('id') ?? '0'))
       return { id : parseInt(localStorage.getItem('id') ?? '0') ,
         email: localStorage.getItem('email') ?? '', password: '',
         token: this.getToken(),address: '',zipCode: '',hometown:'',
