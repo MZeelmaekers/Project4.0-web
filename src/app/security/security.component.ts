@@ -37,15 +37,15 @@ export class SecurityComponent implements OnInit {
         this.router.navigate(['']);
         break;
       }
-      case '/register': {
-        this.isRegister = true;
-        break;
-      }
       default: {
         this.isLogin = true;
         break;
       }
     }
+  }
+
+  register(): void{
+    this.router.navigate(['register/'], {state: {mode:'add'}});
   }
 
   onSubmit(): void {
@@ -62,6 +62,7 @@ export class SecurityComponent implements OnInit {
         localStorage.setItem('token', result.token);
         localStorage.setItem('id', result.id.toString());
         localStorage.setItem('email', result.email);
+        localStorage.setItem('role', result.role.toString());
         this.router.navigate(['']);
       }, error => {
         this.errorMessage = 'Email/password not correct!';

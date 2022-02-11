@@ -1,0 +1,43 @@
+<div class="alert alert-danger" role="alert" *ngIf="isSubmitted && errorMessage">
+  {{errorMessage}}
+</div>
+<form (ngSubmit)="onSubmit()" [formGroup]="userForm">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" name="name" placeholder="Name" formControlName="name" minlength="2">
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="text" class="form-control" id="email" name="email" placeholder="Email" formControlName="email" minlength="2">
+  </div>
+  <div class="form-group" *ngIf="isAdd">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="password" name="password" placeholder="Password" formControlName="password" minlength="2">
+  </div>
+  <div class="form-group">
+    <label for="address">Address</label>
+    <input type="text" class="form-control" id="address" name="address" placeholder="Address" formControlName="address" minlength="2">
+  </div>
+  <div class="form-group">
+    <label for="zipCode">Zip Code</label>
+    <input type="text" class="form-control" id="zipCode" name="zipCode" placeholder="Zip code" formControlName="zipCode" minlength="2">
+  </div>
+  <div class="form-group">
+    <label for="hometown">Hometown</label>
+    <input type="text" class="form-control" id="hometown" name="hometown" placeholder="Hometown" formControlName="hometown" minlength="2">
+  </div>
+  <div class="form-group" *ngIf="userRole == '1'">
+    <label for="role">Role</label>
+    <select name="role" id="role" class="form-control" formControlName="role">
+      <option value="0">User</option>
+      <option value="1">Admin</option>
+      <option value="2">Supervisor</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="superVisorId">Supervisor</label>
+    <input type="text" class="form-control" id="superVisorId" name="superVisorId" placeholder="Supervisor" formControlName="superVisorId">
+  </div>
+  <button type="submit" class="btn btn-primary" *ngIf="isAdd" [disabled]="!userForm.valid || isSubmitted">Create</button>
+  <button type="submit" class="btn btn-primary" *ngIf="isEdit" [disabled]="!userForm.valid || isSubmitted">Save</button>
+</form>

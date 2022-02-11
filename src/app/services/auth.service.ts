@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from "../security/user";
 import {Observable} from 'rxjs';
 import {UserResponse} from "../security/userResponse";
@@ -31,6 +31,9 @@ export class AuthService {
 
   deleteToken(): void {
     localStorage.removeItem('token');
+    localStorage.removeItem("email");
+    localStorage.removeItem("role");
+    localStorage.removeItem("id");
   }
 
   isLoggedIn(): boolean {
@@ -42,6 +45,8 @@ export class AuthService {
   }
 
   register(user: User): Observable<UserResponse> {
-    return this.httpClient.post<UserResponse>('https://project40-api-dot-net20220124112651.azurewebsites.net/api/User', user);
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+    return this.httpClient.post<UserResponse>('https://project40-api-dot-net20220124112651.azurewebsites.net/api/User', user, {headers: headers});
   }
 }

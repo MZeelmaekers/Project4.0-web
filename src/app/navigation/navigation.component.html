@@ -16,13 +16,19 @@
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" routerLink="/plants">Results</a>
       </li>
+      <li class="nav-item" routerLinkActive="active" *ngIf="userRole == '1'">
+        <a class="nav-link" routerLink="/admin/users">Users</a>
+      </li>
     </ul>
     <ul class="navbar-nav ml-auto">
       <li *ngIf="!authService.isLoggedIn()" class="nav-item" routerLinkActive="active">
         <a class="nav-link" routerLink="/login">Login</a>
       </li>
       <li *ngIf="!authService.isLoggedIn()" class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="/register">Register</a>
+        <a class="nav-link pointer" (click)="register()">Register</a>
+      </li>
+      <li *ngIf="authService.isLoggedIn()" class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/password">Change password</a>
       </li>
       <li *ngIf="authService.isLoggedIn()" class="nav-item" routerLinkActive="active">
         <a class="nav-link" routerLink="/logout">Logout</a>

@@ -11,4 +11,5 @@ export interface User{
   createdAt: string;
   role: Role;
   superVisorId:number;
+  superVisor: User;
 }
