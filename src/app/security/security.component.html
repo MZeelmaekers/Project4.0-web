@@ -3,6 +3,7 @@
   {{errorMessage}}
 </div>
 <form (ngSubmit)="onSubmit()" #authForm="ngForm">
+
   <div class="form-group">
     <label for="email">Email</label>
     <input type="email" name="email" id="email" class="form-control" [(ngModel)]="user.email" required email>
@@ -14,4 +15,4 @@
   <input name="login" id="login" class="btn btn-block btn-primary mb-4" type="submit" value="Login" [disabled]="!authForm.form.valid || isSubmitted">
 </form>
 
-<p class="login-wrapper-footer-text">Don't have an account? <a href="/register">Register here</a></p>
+<p class="login-wrapper-footer-text">Don't have an account? <u><a class="text-primary pointer" (click)="register()">Register here</a></u></p>

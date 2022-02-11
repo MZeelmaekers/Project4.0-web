@@ -1,0 +1,29 @@
+<h1>Users</h1>
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped">
+  <thead class="bg-primary text-white">
+  <tr>
+    <th scope="col">Id</th>
+    <th scope="col">Name</th>
+    <th scope="col">Email</th>
+    <th scope="col">Role</th>
+    <th scope="col">Supervisor</th>
+    <th scope="col">Address</th>
+    <th scope="col">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let user of (users)" class="pointer">
+    <td>{{user.id}}</td>
+    <td>{{user.name}}</td>
+    <td>{{user.email}}</td>
+    <td>{{Role[user.role]}}</td>
+    <td *ngIf="user.superVisor != null">{{user.superVisor.name}}</td>
+    <td *ngIf="user.superVisor == null">None</td>
+    <td>{{user.address}} {{user.hometown}}</td>
+    <td>
+      <button (click)="edit(user.id)" class="btn btn-secondary text-white"><i class="fas fa-edit"></i></button>
+      <button (click)="delete(user.id)" class="btn btn-danger text-white"><i class="fas fa-trash"></i></button>
+    </td>
+  </tr>
+  </tbody>
+</table>
