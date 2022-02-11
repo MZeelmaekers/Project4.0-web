@@ -52,12 +52,8 @@ export class SecurityComponent implements OnInit {
     this.isSubmitted = true;
 
     if (this.isLogin) {
-      console.log(this.user)
       this.authService.authenticate(this.user).subscribe(result => {
         this.errorMessage = '';
-        console.log(result)
-        console.log(result)
-        console.log(result.token)
         // save access token localstorage
         localStorage.setItem('token', result.token);
         localStorage.setItem('id', result.id.toString());
