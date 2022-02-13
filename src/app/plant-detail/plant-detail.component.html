@@ -8,5 +8,6 @@
     <p>Accuracy: {{result.accuracy}}%</p>
     <p>Fieldname: {{plant.fieldName}}</p>
     <p>Created At: {{plant.createdAt | date:'dd/MM/yyyy - HH:mm'}}</p>
+    <p><button class="btn btn-danger text-white" (click)="delete(plant.id, plant.resultId)"><i class="fas fa-trash"></i></button></p>
   </div>
 </div>

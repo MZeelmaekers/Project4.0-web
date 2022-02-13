@@ -33,10 +33,10 @@ export class PlantService {
     return this.httpClient.post<Plant>(this.url + 'Plant', plant, {headers: headers});
   }
 
-  deletePlantAndResult(plantId: number, resultId:number){
+  deletePlant(plantId: number): Observable<Plant>{
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json; charset=utf-8').set('Authorization', 'Bearer ' + this.token);
-    this.httpClient.delete<Plant>(this.url + 'Plant/' + plantId, {headers: headers});
+    return this.httpClient.delete<Plant>(this.url + 'Plant/' + plantId, {headers: headers});
   }
 
 }

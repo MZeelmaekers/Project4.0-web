@@ -13,7 +13,7 @@
     <td width="30%"><img src="{{getPhoto(plant.fotoPath)}}" width="50%"  alt="test"></td>
     <td>{{plant.name}}</td>
     <td>{{plant.createdAt | date:'dd/MM/yyyy - HH:mm'}}</td>
-    <td (click)="delete(plant.id)"><button class="btn btn-danger text-white"><i class="fas fa-trash"></i></button></td>
+    <td><button class="btn btn-danger text-white"><i (click)="$event.stopPropagation();delete(plant.id, plant.resultId)" class="fas fa-trash"></i></button></td>
   </tr>
   </tbody>
 </table>
