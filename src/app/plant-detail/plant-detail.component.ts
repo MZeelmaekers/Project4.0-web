@@ -25,6 +25,9 @@ export class PlantDetailComponent implements OnInit, OnDestroy {
   plant$ = new Subscription()
   result$ = new Subscription()
 
+  deletePlantSubscription: Subscription = new Subscription();
+  deleteResultSubscription: Subscription = new Subscription();
+
   constructor(private router: Router,
               private plantService: PlantService,
               private resultService: ResultService,) {
@@ -37,6 +40,8 @@ export class PlantDetailComponent implements OnInit, OnDestroy {
   ngOnDestroy(){
     this.plant$.unsubscribe();
     this.result$.unsubscribe();
+    this.deletePlantSubscription.unsubscribe();
+    this.deleteResultSubscription.unsubscribe();
   }
 
   async getPlant(){
@@ -60,6 +65,14 @@ export class PlantDetailComponent implements OnInit, OnDestroy {
   getPhoto(imageName: string) {
     let blockBlobClient = this.containerClient.getBlockBlobClient(imageName)
     return blockBlobClient.url
+  }
+
+  async delete(plantId: number, resultId: number) {
+    this.deletePlantSubscription = await this.plantService.deletePlant(plantId).subscribe(plant => {
+      this.deleteResultSubscription = this.resultService.deleteResult(resultId).subscribe(result => {
+        this.router.navigate(['plants']);
+      });
+    });
   }
 
 }

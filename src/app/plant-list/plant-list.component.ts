@@ -6,6 +6,7 @@ import {BlobServiceClient} from "@azure/storage-blob";
 import {Stream} from "stream";
 import {resolve} from "path";
 import {Router} from "@angular/router";
+import {ResultService} from "../services/result.service";
 
 
 @Component({
@@ -22,12 +23,15 @@ export class PlantListComponent implements OnInit, OnDestroy {
 
   plants: Plant[] = []
   subscription: Subscription = new Subscription();
+  deletePlantSubscription: Subscription = new Subscription();
+  deleteResultSubscription: Subscription = new Subscription();
   //Datatables
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
 
 
   constructor(private plantService: PlantService,
+              private resultService: ResultService,
               private router: Router,) { }
 
   ngOnInit(): void {
@@ -45,14 +49,21 @@ export class PlantListComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(){
     this.subscription.unsubscribe()
+    this.deletePlantSubscription.unsubscribe()
+    this.deleteResultSubscription.unsubscribe()
   }
 
   async getPlants(){
       this.subscription = await this.plantService.getPlants().subscribe(data => {
         this.plants = data;
         this.dtTrigger.next();
-
       });
+  }
+
+  async getPlantsAfterDelete(){
+    this.subscription = await this.plantService.getPlants().subscribe(data => {
+      this.plants = data;
+    });
   }
 
   getPhoto(imageName: string) {
@@ -65,7 +76,11 @@ export class PlantListComponent implements OnInit, OnDestroy {
     await this.router.navigate(['plants/detail'], {state: {id: id}});
   }
 
-  delete(id: number) {
-    
+  async delete(plantId: number, resultId: number) {
+    this.deletePlantSubscription = await this.plantService.deletePlant(plantId).subscribe(plant => {
+      this.deleteResultSubscription = this.resultService.deleteResult(resultId).subscribe(result => {
+        this.getPlantsAfterDelete()
+      });
+    });
   }
 }

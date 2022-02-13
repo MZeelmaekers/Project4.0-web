@@ -20,10 +20,14 @@ export class ResultService {
   }
 
    postResult(result: Result): Observable<Result>{
-     console.log('resultService')
-    console.log(result)
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json; charset=utf-8').set('Authorization', 'Bearer ' + this.token);
     return this.httpClient.post<Result>(this.url + 'Result', result, {headers: headers});
+  }
+
+  deleteResult(id: number): Observable<Result>{
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json; charset=utf-8').set('Authorization', 'Bearer ' + this.token);
+    return this.httpClient.delete<Result>(this.url + 'Result/' + id, {headers: headers});
   }
 }
