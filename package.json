@@ -9,19 +9,23 @@
     "test": "ng test",
     "heroku-postbuild": "ng build"
   },
-  "engines": { "node": "16.13.1", "npm": "8.3.0" },
+  "engines": {
+    "node": "16.13.1",
+    "npm": "8.3.0"
+  },
   "dependencies": {
-    "@angular/cli": "^12.2.16",
-    "@angular/compiler-cli": "~12.2.16",
     "@angular/animations": "~12.2.16",
+    "@angular/cli": "^12.2.16",
     "@angular/common": "~12.2.16",
     "@angular/compiler": "~12.2.16",
+    "@angular/compiler-cli": "~12.2.16",
     "@angular/core": "~12.2.16",
     "@angular/forms": "~12.2.16",
     "@angular/platform-browser": "~12.2.16",
     "@angular/platform-browser-dynamic": "~12.2.16",
     "@angular/router": "~12.2.16",
     "@azure/storage-blob": "^12.8.0",
+    "angular-azure-blob-service": "^1.1.0",
     "angular-datatables": "^13.0.1",
     "bootstrap": "^4.5.3",
     "datatables.net": "^1.11.3",

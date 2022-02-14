@@ -18,9 +18,6 @@ export class UploadComponent implements OnInit {
   postResult$ = new Subscription;
 
   //Blob
-  con_str = 'BlobEndpoint=https://storagemainfotosplanten.blob.core.windows.net/;QueueEndpoint=https://storagemainfotosplanten.queue.core.windows.net/;FileEndpoint=https://storagemainfotosplanten.file.core.windows.net/;TableEndpoint=https://storagemainfotosplanten.table.core.windows.net/;SharedAccessSignature=sv=2020-08-04&ss=bfqt&srt=sco&sp=rwdlacupitfx&se=2022-02-28T18:30:58Z&st=2022-01-19T10:30:58Z&sip=193.190.124.1&spr=https&sig=tYouTdGZ%2FJ612aumxhCoB%2F2iWpZHQ4lNzc%2FH4NE34Ys%3D'
-  blobServiceClient = BlobServiceClient.fromConnectionString(this.con_str);
-  containerClient = this.blobServiceClient.getContainerClient('botanic');
   filePath = ''
 
 
@@ -89,10 +86,14 @@ export class UploadComponent implements OnInit {
   }
 
   async postPhoto(image: File) {
+    let con_str = 'BlobEndpoint=https://storagemainfotosplanten.blob.core.windows.net/;QueueEndpoint=https://storagemainfotosplanten.queue.core.windows.net/;FileEndpoint=https://storagemainfotosplanten.file.core.windows.net/;TableEndpoint=https://storagemainfotosplanten.table.core.windows.net/;SharedAccessSignature=sv=2020-08-04&ss=bfqt&srt=sco&sp=rwdlacupitfx&se=2022-02-28T18:30:58Z&st=2022-01-19T10:30:58Z&sip=193.190.124.1&spr=https&sig=tYouTdGZ%2FJ612aumxhCoB%2F2iWpZHQ4lNzc%2FH4NE34Ys%3D'
+    let blobServiceClient = BlobServiceClient.fromConnectionString(con_str);
+    let containerClient = blobServiceClient.getContainerClient('botanic');
     const randomId = Math.random().toString(36).substring(2);
     this.filePath = randomId + '.jpg';
-    let blockBlobClient = await this.containerClient.getBlockBlobClient(this.filePath)
+    let blockBlobClient = await containerClient.getBlockBlobClient(this.filePath)
     blockBlobClient.upload(image, image.size);
+    console.log(blockBlobClient.upload(image, image.size))
 
     this.postResult(this.resultForm.value)
   }

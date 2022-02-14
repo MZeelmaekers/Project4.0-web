@@ -34,10 +34,14 @@
       <option value="2">Supervisor</option>
     </select>
   </div>
+
   <div class="form-group">
     <label for="superVisorId">Supervisor</label>
-    <input type="text" class="form-control" id="superVisorId" name="superVisorId" placeholder="Supervisor" formControlName="superVisorId">
+    <select class="form-control" id="superVisorId" name="superVisorId" formControlName="superVisorId">
+      <option *ngFor="let superVisor of superVisors" value="{{superVisor.id}}">{{superVisor.name}}</option>
+    </select>
   </div>
-  <button type="submit" class="btn btn-primary" *ngIf="isAdd" [disabled]="!userForm.valid || isSubmitted">Create</button>
-  <button type="submit" class="btn btn-primary" *ngIf="isEdit" [disabled]="!userForm.valid || isSubmitted">Save</button>
+
+  <button type="submit" class="btn btn-primary text-white" *ngIf="isAdd" [disabled]="!userForm.valid || isSubmitted">Create</button>
+  <button type="submit" class="btn btn-primary text-white" *ngIf="isEdit" [disabled]="!userForm.valid || isSubmitted">Save</button>
 </form>
