@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { Role } from '../models/role';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
+import {User} from "../models/user";
 
 @Component({
   selector: 'app-user-form',
@@ -21,10 +22,13 @@ export class UserFormComponent implements OnInit, OnDestroy {
   errorMessage: string = '';
 
   user$: Subscription = new Subscription();
+  superVisors$: Subscription = new Subscription();
   postUser$: Subscription = new Subscription();
   putUser$: Subscription = new Subscription();
 
   roleEnum = Role;
+
+  superVisors: User[] = []
 
   userForm = new FormGroup({
     id: new FormControl(0),
@@ -58,20 +62,23 @@ export class UserFormComponent implements OnInit, OnDestroy {
     });
   }}
 
-  getNameSupervisor(id: number): string{
-    this.userService.getUserById(id).subscribe(result => {
-      return result.name;
-    });
-    return "";
-  }
 
   ngOnInit(): void {
+    this.getSuperVisors()
   }
 
   ngOnDestroy(): void {
       this.user$.unsubscribe();
       this.postUser$.unsubscribe();
       this.putUser$.unsubscribe();
+    this.superVisors$.unsubscribe();
+  }
+
+  getSuperVisors(){
+    this.superVisors$ = this.userService.getSuperVisors().subscribe(result =>{
+      this.superVisors = result;
+      console.log(result)
+    });
   }
 
   onSubmit(): void{

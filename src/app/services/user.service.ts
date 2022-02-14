@@ -19,6 +19,10 @@ export class UserService {
     return this.httpClient.get<User[]>(this.url + "User/",{headers: headers});
   }
 
+  getSuperVisors(): Observable<User[]> {
+    return this.httpClient.get<User[]>(this.url + "User/SuperVisors");
+  }
+
   getUserById(id: number): Observable<User> {
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json; charset=utf-8').set('Authorization', 'Bearer ' + this.token );

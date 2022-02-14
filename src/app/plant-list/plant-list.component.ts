@@ -15,10 +15,7 @@ import {ResultService} from "../services/result.service";
   styleUrls: ['./plant-list.component.scss']
 })
 export class PlantListComponent implements OnInit, OnDestroy {
-  //Blob
-  con_str = 'BlobEndpoint=https://storagemainfotosplanten.blob.core.windows.net/;QueueEndpoint=https://storagemainfotosplanten.queue.core.windows.net/;FileEndpoint=https://storagemainfotosplanten.file.core.windows.net/;TableEndpoint=https://storagemainfotosplanten.table.core.windows.net/;SharedAccessSignature=sv=2020-08-04&ss=bfqt&srt=sco&sp=rwdlacupitfx&se=2022-02-28T18:30:58Z&st=2022-01-19T10:30:58Z&sip=193.190.124.1&spr=https&sig=tYouTdGZ%2FJ612aumxhCoB%2F2iWpZHQ4lNzc%2FH4NE34Ys%3D'
-  blobServiceClient = BlobServiceClient.fromConnectionString(this.con_str);
-  containerClient = this.blobServiceClient.getContainerClient('botanic');
+
 
 
   plants: Plant[] = []
@@ -67,7 +64,16 @@ export class PlantListComponent implements OnInit, OnDestroy {
   }
 
   getPhoto(imageName: string) {
-    let blockBlobClient = this.containerClient.getBlockBlobClient(imageName)
+    //Blob
+    let sas = 'sp=racwdli&st=2022-02-14T12:32:37Z&se=2222-02-13T23:00:00Z&spr=https&sv=2020-08-04&sr=c&sig=vFGnKdFLfmShThaggSlbW40%2FQcQu1t8EfzTu17%2BpN9Q%3D'
+    let con_str = 'BlobEndpoint=https://storagemainfotosplanten.blob.core.windows.net/;SharedAccessSignature=sv=2020-08-04&ss=bfqt&srt=sco&sp=rwdlacupitfx&se=2222-02-14T20:39:08Z&st=2022-02-14T12:39:08Z&spr=https&sig=GwiOWGMZJc1DD2svA2HNzRNyQCldiViAOQwUyHOrzPo%3D'
+    let blobServiceClient = BlobServiceClient.fromConnectionString(con_str);
+    console.log(blobServiceClient)
+    let containerClient = blobServiceClient.getContainerClient('botanic');
+    console.log(containerClient)
+    let blockBlobClient = containerClient.getBlockBlobClient(imageName)
+    console.log(blockBlobClient)
+    console.log(blockBlobClient.url)
     return blockBlobClient.url
   }
 
