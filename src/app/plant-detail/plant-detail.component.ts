@@ -17,11 +17,6 @@ export class PlantDetailComponent implements OnInit, OnDestroy {
   plant: Plant = {id: 0, fotoPath: '', location: '', fieldName: '', name: '', createdAt: '', userId: 0, resultId:0}
   result: Result = {id: 0, accuracy: 0, prediction: '', createdAt: ''}
 
-  //Blob
-  con_str = 'BlobEndpoint=https://storagemainfotosplanten.blob.core.windows.net/;QueueEndpoint=https://storagemainfotosplanten.queue.core.windows.net/;FileEndpoint=https://storagemainfotosplanten.file.core.windows.net/;TableEndpoint=https://storagemainfotosplanten.table.core.windows.net/;SharedAccessSignature=sv=2020-08-04&ss=bfqt&srt=sco&sp=rwdlacupitfx&se=2022-02-28T18:30:58Z&st=2022-01-19T10:30:58Z&sip=193.190.124.1&spr=https&sig=tYouTdGZ%2FJ612aumxhCoB%2F2iWpZHQ4lNzc%2FH4NE34Ys%3D'
-  blobServiceClient = BlobServiceClient.fromConnectionString(this.con_str);
-  containerClient = this.blobServiceClient.getContainerClient('botanic');
-
   plant$ = new Subscription()
   result$ = new Subscription()
 
@@ -63,7 +58,11 @@ export class PlantDetailComponent implements OnInit, OnDestroy {
   }
 
   getPhoto(imageName: string) {
-    let blockBlobClient = this.containerClient.getBlockBlobClient(imageName)
+    //Blob
+    let con_str = 'BlobEndpoint=https://storagemainfotosplanten.blob.core.windows.net/;SharedAccessSignature=sv=2020-08-04&ss=bfqt&srt=sco&sp=rwdlacupitfx&se=2222-02-14T20:39:08Z&st=2022-02-14T12:39:08Z&spr=https&sig=GwiOWGMZJc1DD2svA2HNzRNyQCldiViAOQwUyHOrzPo%3D'
+    let blobServiceClient = BlobServiceClient.fromConnectionString(con_str);
+    let containerClient = blobServiceClient.getContainerClient('botanic');
+    let blockBlobClient = containerClient.getBlockBlobClient(imageName)
     return blockBlobClient.url
   }
 
