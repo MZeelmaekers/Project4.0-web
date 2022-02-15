@@ -4,6 +4,7 @@
   <tr>
     <th scope="col">Picture</th>
     <th scope="col">Name</th>
+    <th scope="col">Field name</th>
     <th scope="col">Date</th>
     <th scope="col">Delete</th>
   </tr>
@@ -12,6 +13,7 @@
   <tr *ngFor="let plant of (plants)" (click)="detail(plant.id)" class="pointer">
     <td width="30%"><img src="{{getPhoto(plant.fotoPath)}}" width="50%"  alt="test"></td>
     <td>{{plant.name}}</td>
+    <td>{{plant.fieldName}}</td>
     <td>{{plant.createdAt | date:'dd/MM/yyyy - HH:mm'}}</td>
     <td><button class="btn btn-danger text-white"><i (click)="$event.stopPropagation();delete(plant.id, plant.resultId)" class="fas fa-trash"></i></button></td>
   </tr>

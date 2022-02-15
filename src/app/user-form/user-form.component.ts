@@ -39,7 +39,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
     address: new FormControl(""),
     zipCode: new FormControl(""),
     hometown: new FormControl(""),
-    superVisorId: new FormControl(0)
+    superVisorId: new FormControl(-1)
   });
 
   constructor(private router: Router, private userService: UserService, private authService: AuthService) { this.isAdd = this.router.getCurrentNavigation()?.extras.state?.mode === 'add';
@@ -83,7 +83,12 @@ export class UserFormComponent implements OnInit, OnDestroy {
 
   onSubmit(): void{
     this.isSubmitted = true;
-    if(this.isAdd){
+    if(!this.isEdit){
+      if(this.userForm.controls["superVisorId"].value == -1){
+        this.userForm.patchValue({
+          superVisorId: null
+        })
+      }
       this.postUser$ = this.authService.register(this.userForm.value).subscribe(result => {
         this.router.navigateByUrl("/");
       }, error => {
@@ -91,6 +96,11 @@ export class UserFormComponent implements OnInit, OnDestroy {
       });
     }
     if (this.isEdit){
+      if(this.userForm.controls["superVisorId"].value == -1){
+        this.userForm.patchValue({
+          superVisorId: null
+        })
+      }
       this.putUser$ = this.userService.putUser(this.userId, this.userForm.value).subscribe(result => {
         this.router.navigateByUrl("/admin/users");
       }, error => {
